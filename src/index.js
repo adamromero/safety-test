@@ -1,21 +1,22 @@
 let Test = (() => {
 	const url = "/dist/qa.js";
+	let score = 0;
 
 	const loadContent = () => {
 		let xmlhttp = new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-		  if (this.readyState === 4 && this.status === 200) {
-		    let questions = JSON.parse(this.responseText);
-		    render(questions);
-		    bindUIActions(questions);
-		  }
+		xmlhttp.onreadystatechange = function () {
+			if (this.readyState === 4 && this.status === 200) {
+				let questions = JSON.parse(this.responseText);
+				render(questions);
+				bindUIActions(questions);
+			}
 		};
 		xmlhttp.open("GET", url, true);
 		xmlhttp.send();
 	}
 
 	let render = (questions) => {
-		let source   = document.getElementById("entry-template").innerHTML;
+		let source = document.getElementById("entry-template").innerHTML;
 		let template = Handlebars.compile(source);
 		let compiled = template(questions);
 		document.getElementById("content").innerHTML = compiled;
@@ -24,9 +25,11 @@ let Test = (() => {
 	const evaluateSelection = (questions, currentQuestion, answerSelection) => {
 		if (answerSelection === questions["questions"][currentQuestion]["c"]) {
 			console.log("correct");
+			score++;
 		} else {
 			console.log("wrooong!");
 		}
+		console.log(Math.floor((score / questions["questions"].length) * 100) + "%");
 	}
 
 	const bindUIActions = (questions) => {
@@ -39,7 +42,7 @@ let Test = (() => {
 	}
 
 	let init = () => loadContent();
-	
+
 	return { init };
 })();
 
