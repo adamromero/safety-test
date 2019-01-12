@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="content" class=""></div>
+	<script type="text/javascript" src="/node_modules/handlebars/dist/handlebars.min.js"></script>
+	<script id="entry-template" type="text/x-handlebars-template">
+		{{#each questions}}
+		<div data-question={{@index}}>
+			<strong>Question:</strong> {{q}}
+			{{#each a}}
+				<div data-answer={{@index}}>{{this}}</div>
+			{{/each}}
+		</div>
+		<br>
+		{{/each}}
+	</script>
+	<script type="text/javascript" src="bundle.js"></script>
+</body>
+</html>
