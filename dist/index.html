@@ -2,20 +2,24 @@
 <html>
 <head>
 	<title>California Firearm Safety Test</title>
+	<link rel='shortcut icon' type='image/x-icon' href='favicon.png' />
+	<link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
+	<link rel="stylesheet" href="main.css" />
 </head>
-<body>
-	<div id="content" class=""></div>
+<body>	
+	<div id="content" class="wrapper"></div>
 	<script type="text/javascript" src="/node_modules/handlebars/dist/handlebars.min.js"></script>
 	<script id="entry-template" type="text/x-handlebars-template">
 		{{#each questions}}
-		<div data-question={{@index}}>
-			<strong>Question:</strong> {{q}}
+		<div data-question={{@index}} class="data-question">
+			<div class="quiz-question">{{q}}</div>
 			{{#each a}}
-				<div data-answer={{@index}}>{{this}}</div>
+				<div data-answer={{@index}} class="quiz-answer">{{this}}</div>
 			{{/each}}
 		</div>
-		<br>
 		{{/each}}
+		<input type="button" class="button" value="Next" disabled />
+		<div id="display" class="display-message"></div>
 	</script>
 	<script type="text/javascript" src="bundle.js"></script>
 </body>
